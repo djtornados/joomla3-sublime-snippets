@@ -48,6 +48,8 @@ if (\$browser->getBrowser() == 'msie' && intval(\$browser->getMajor()) <= 9)
 if (\$browser->getBrowser() == 'msie')
 {
 	\$this->setMetaData('X-UA-Compatible', 'IE=edge,chrome=1', true);
+
+	header('X-UA-Compatible: IE=edge,chrome=1');
 }
 
 \$this->setMetaData('viewport', 'width=device-width, initial-scale=1.0', false);

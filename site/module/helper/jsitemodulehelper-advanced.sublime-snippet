@@ -9,14 +9,14 @@ JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_${TM_COMPONENT/(.+)/\
  * Helper for mod_${1/(.+)/\L\1/g}.
  *
  * @package     ${TM_COMPONENT/(.+)/\u\1/g}
- * @subpackage  mod_${1/(.+)/\L\1/g}
+ * @subpackage  mod_${TM_COMPONENT/(.+)/\L\1/g}
  * @author      $TM_FULLNAME <$TM_EMAIL>
  * @since       $TM_VERSION
  */
-abstract class Mod${1:$TM_MODULE}Helper
+abstract class Mod${1:${TM_MODULE/(.+)/\u\1/g}}Helper
 {
 	/**
-	 * Get a list of the ${4:${2/(.+)(s\b)/\L\1/g}} items.
+	 * Get a list of the ${3/(.+)/\L\1/g} items.
 	 *
 	 * @param   JRegistry  &\$params  The module options.
 	 *
@@ -29,11 +29,11 @@ abstract class Mod${1:$TM_MODULE}Helper
 		// Get the dbo.
 		\$db = JFactory::getDbo();
 
-		// Get an instance of the generic ${2:${1/(_+)/ /g}} model.
-		\$model = JModelLegacy::getInstance('${2/(.+)/\u\1/g}', '${TM_COMPONENT/(.+)/\u\1/g}Model', array('ignore_request' => true));
+		// Get an instance of the generic ${2/(.+)/\L\1/g} model.
+		\$model = JModelLegacy::getInstance('${2:Plural}', '${TM_COMPONENT/(.+)/\u\1/g}Model', array('ignore_request' => true));
 
 		// Set application parameters in model.
-		\$app = JFactory::getApplication();
+		\$app       = JFactory::getApplication();
 		\$appParams = \$app->getParams();
 		\$model->setState('params', \$appParams);
 
@@ -43,7 +43,7 @@ abstract class Mod${1:$TM_MODULE}Helper
 		\$model->setState('filter.state', 1);
 
 		// Access filter.
-		\$access = !JComponentHelper::getParams('com_${TM_COMPONENT/(.+)/\L\1/g}')->get('show_noauth');
+		\$access     = !JComponentHelper::getParams('com_${TM_COMPONENT/(.+)/\L\1/g}')->get('show_noauth');
 		\$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		\$model->setState('filter.access', \$access);
 
@@ -90,13 +90,14 @@ abstract class Mod${1:$TM_MODULE}Helper
 
 		// Set ordering.
 		\$order_map = array(
-			'm_dsc' => 'a.modified DESC, a.created',
+			'm_dsc'  => 'a.modified DESC, a.created',
 			'mc_dsc' => 'CASE WHEN (a.modified = ' . \$db->quote(\$db->getNullDate()) . ') THEN a.created ELSE a.modified END',
-			'c_dsc' => 'a.created',
-			'p_dsc' => 'a.publish_up',
+			'c_dsc'  => 'a.created',
+			'p_dsc'  => 'a.publish_up',
+			'random' => 'RAND()',
 		);
-		\$ordering = JArrayHelper::getValue(\$order_map, \$params->get('ordering'), 'a.publish_up');
-		\$dir = 'DESC';
+		\$ordering  = JArrayHelper::getValue(\$order_map, \$params->get('ordering'), 'a.publish_up');
+		\$dir       = 'DESC';
 
 		\$model->setState('list.ordering', \$ordering);
 		\$model->setState('list.direction', \$dir);
@@ -105,15 +106,14 @@ abstract class Mod${1:$TM_MODULE}Helper
 
 		foreach (\$items as &\$item)
 		{
-			// Compute the ${3/(.+)/\L\1/g} slug.
 			\$item->slug     = \$item->id . ':' . \$item->alias;
 			\$item->catslug  = \$item->catid . ':' . \$item->category_alias;
-			\$item->link     = ${TM_COMPONENT/(.+)/\u\1/g}HelperRoute::get${1/(.+)/\u\1/g}Route(\$item->slug, \$item->catslug);
-			\$item->cat_link = ${TM_COMPONENT/(.+)/\u\1/g}HelperRoute::getCategoryRoute(\$item->catslug);
+			\$item->link     = ${TM_COMPONENT/(.+)/\u\1/g}HelperRoute::get${3:${2/(.+)(s\b)/\u\1/g}}Route(\$item->slug, \$item->catslug);
+			\$item->cat_link = ${TM_COMPONENT/(.+)/\u\1/g}Route::getCategoryRoute(\$item->catslug);
 
 			if (\$access || in_array(\$item->access, \$authorised))
 			{
-				// We know that user has the privilege to view the ${3:view}.
+				// We know that user has the privilege to view the ${3/(.+)/\L\1/g}.
 				\$item->link = JRoute::_(${TM_COMPONENT/(.+)/\u\1/g}HelperRoute::get${3/(.+)/\u\1/g}Route(\$item->slug, \$item->catslug));
 			}
 			else

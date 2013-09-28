@@ -3,21 +3,24 @@
 <form>
 	<fieldset
 		name="details"
+		addrulepath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/rules"
 		addfieldpath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/fields">
 		<field
 			name="id"
 			type="text"
 			default="0"
 			class="readonly"
+			size="10"
 			readonly="true"
 			label="JGLOBAL_FIELD_ID_LABEL"
 			description="JGLOBAL_FIELD_ID_DESC" />
 		<field
 			name="${1:title}"
 			type="text"
-			class="inputbox"
+			class="input-xlarge"
+			labelclass="control-label"
 			required="true"
-			size="40"
+			size="30"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_${1/(.+)/\U\1/g}_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_${1/(.+)/\U\1/g}_DESC" />
 		<field
@@ -35,11 +38,63 @@
 		</field>
 		<field
 			name="ordering"
-			type="ordering"
+			type="${2:${TM_FILENAME/(.*?)(\..+)/\L$1/}}ordering"
 			default="0"
 			class="inputbox"
+			table="#__${TM_COMPONENT/(.+)/\L\1/g}$3"
 			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC" />
+	</fieldset>
+	<fieldset
+		name="publish"
+		label="JGLOBAL_FIELDSET_PUBLISHING">
+		<field
+			name="created"
+			type="calendar"
+			class="inputbox"
+			size="22"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"
+			label="JGLOBAL_FIELD_CREATED_LABEL"
+			description="JGLOBAL_FIELD_CREATED_DESC" />
+		<field
+			name="created_by"
+			type="user"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL"
+			description="JGLOBAL_FIELD_CREATED_BY_Desc" />
+		<field
+			name="created_by_alias"
+			type="text"
+			class="inputbox"
+			size="20"
+			label="JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL"
+			description="JGLOBAL_FIELD_CREATED_BY_ALIAS_DESC" />
+		<field
+			name="modified"
+			type="calendar"
+			class="readonly"
+			size="22"
+			readonly="true"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"
+			label="JGLOBAL_FIELD_MODIFIED_LABEL"
+			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_MODIFIED_DESC" />
+		<field
+			name="modified_by"
+			type="user"
+			class="readonly"
+			readonly="true"
+			filter="unset"
+			label="JGLOBAL_FIELD_MODIFIED_BY_LABEL"
+			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_MODIFIED_BY_DESC" />
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset" />
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset" />
 	</fieldset>
 </form>
 

@@ -14,7 +14,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 	 *
 	 * @param   array  \$config  An optional associative array of configuration settings.
 	 *
-	 * @see     JController
+	 * @see     JModelList
 	 * @since   $TM_VERSION
 	 */
 	public function __construct(\$config = array())
@@ -80,6 +80,9 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$published = \$this->getUserStateFromRequest(\$this->context . '.filter.state', 'filter_state', '', 'string');
 		\$this->setState('filter.state', \$published);
 
+		\$level = \$this->getUserStateFromRequest(\$this->context . '.filter.level', 'filter_level', 0, 'int');
+		\$this->setState('filter.level', \$level);
+
 		\$language = \$this->getUserStateFromRequest(\$this->context . '.filter.language', 'filter_language', '');
 		\$this->setState('filter.language', \$language);
 
@@ -123,6 +126,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$id .= ':' . \$this->getState('filter.access');
 		\$id .= ':' . \$this->getState('filter.author_id');
 		\$id .= ':' . \$this->getState('filter.state');
+		\$id .= ':' . \$this->getState('filter.level');
 		\$id .= ':' . \$this->getState('filter.language');
 		\$id .= ':' . \$this->getState('filter.tag');
 

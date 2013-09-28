@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[# complete
+
+-
+
+# nocategory
+
+- catid|featured|levels
+
+search: catid|c\.
+
+# simple
+
+- asset_id
+- catid
+- images
+
+search: asset_id|catid|images|c\.|featured|rules|levels
+
+# mini
+
+- asset_id
+- catid
+- alias
+- description
+- access
+- images
+- params
+- language
+- publish_up
+- publish_down
+- version
+- hits
+- metadesc
+- metakey
+- metadata
+- featured
+- xreference
+
+search: asset_id|catid|alias|description|access|images|params|language|publish_up|publish_down|version|hits|metadesc|metakey|metadata|featured|xreference|rules|tag|c\.|levels
+
+]]></content>
+	<tabTrigger>jcompare</tabTrigger>
+	<!-- <scope>source.python</scope> -->
+</snippet>

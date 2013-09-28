@@ -11,8 +11,10 @@
 public static function item(\$extension)
 {
 	// Create the copy/move options.
-	\$options = array(JHtml::_('select.option', 'c', JText::_('JLIB_HTML_BATCH_COPY')),
-		JHtml::_('select.option', 'm', JText::_('JLIB_HTML_BATCH_MOVE')));
+	\$options = array(
+		JHtml::_('select.option', 'c', JText::_('JLIB_HTML_BATCH_COPY')),
+		JHtml::_('select.option', 'm', JText::_('JLIB_HTML_BATCH_MOVE'))
+	);
 
 	// Create the batch selector to move or copy.
 	\$lines = array('<div id="batch-move-copy" class="control-group radio">',

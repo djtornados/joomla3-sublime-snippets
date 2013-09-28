@@ -3,12 +3,14 @@
 <form>
 	<fieldset
 		name="details"
+		addrulepath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/rules"
 		addfieldpath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/fields">
 		<field
 			name="id"
 			type="text"
 			default="0"
 			class="readonly"
+			size="10"
 			readonly="true"
 			label="JGLOBAL_FIELD_ID_LABEL"
 			description="JGLOBAL_FIELD_ID_DESC" />
@@ -19,9 +21,10 @@
 		<field
 			name="${1:title}"
 			type="text"
-			class="inputbox"
+			class="input-xlarge"
+			labelclass="control-label"
 			required="true"
-			size="40"
+			size="30"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_${1/(.+)/\U\1/g}_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_${1/(.+)/\U\1/g}_DESC" />
 		<field
@@ -55,9 +58,10 @@
 		</field>
 		<field
 			name="ordering"
-			type="ordering"
+			type="${2:${TM_FILENAME/(.*?)(\..+)/\L$1/}}ordering"
 			default="0"
 			class="inputbox"
+			table="#__${TM_COMPONENT/(.+)/\L\1/g}$3"
 			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC" />
 		<field
@@ -118,13 +122,21 @@
 			description="JTAG_DESC">
 		</field>
 		<field
+			name="version_note"
+			type="text"
+			class="inputbox"
+			size="45"
+			labelclass="control-label"
+			label="JGLOBAL_FIELD_VERSION_NOTE_LABEL"
+			description="JGLOBAL_FIELD_VERSION_NOTE_DESC" />
+		<field
 			name="rules"
 			type="rules"
 			class="inputbox"
 			translate_label="false"
 			filter="rules"
 			component="com_${TM_COMPONENT/(.+)/\L\1/g}"
-			section="${2:${TM_COMPONENT/(.+)(s\b)/\L\1/g}}"
+			section="${4:${2/(.+)/\L\1/g}}"
 			validate="rules"
 			label="JFIELD_RULES_LABEL" />
 	</fieldset>
@@ -216,7 +228,8 @@
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_HITS_DESC" />
 	</fieldset>
 	<fields
-		name="images">
+		name="images"
+		label="JGLOBAL_FIELDSET_IMAGE_OPTIONS">
 		<field
 			name="image_first"
 			type="media"
@@ -277,7 +290,8 @@
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_IMAGE_CAPTION_DESC" />
 	</fields>
 	<fields
-		name="metadata">
+		name="metadata"
+		label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 		<fieldset
 			name="jmetadata"
 			label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
@@ -313,7 +327,8 @@
 		</fieldset>
 	</fields>
 	<fields
-		name="params">
+		name="params"
+		label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
 		<fieldset
 			name="jbasic"
 			label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS" />

@@ -24,28 +24,13 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Controller${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}}
 	 * @param   string  \$prefix  The class prefix. Optional.
 	 * @param   array   \$config  Configuration array for model. Optional.
 	 *
-	 * @return  object  The model.
+	 * @return  JModelLegacy
 	 *
 	 * @since   $TM_VERSION
 	 */
 	public function getModel(\$name = '${2:${1/(.+)(s\b)/\u\1/g}}', \$prefix = '${TM_COMPONENT/(.+)/\u\1/g}Model', \$config = array('ignore_request' => true))
 	{
 		return parent::getModel(\$name, \$prefix, \$config);
-	}
-
-	/**
-	 * Method to provide child classes the opportunity to process after the delete task.
-	 *
-	 * @param   JModelLegacy  \$model  The model for the component
-	 * @param   mixed         \$ids    Array of ids deleted.
-	 *
-	 * @return  void
-	 *
-	 * @since   $TM_VERSION
-	 */
-	protected function postDeleteHook(JModelLegacy \$model, \$ids = null)
-	{
-
 	}
 }
 

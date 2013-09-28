@@ -8,16 +8,31 @@
 	</div>
 	<div class="modal-body">
 		<p><?php echo JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_BATCH_TIP'); ?></p>
+		<div class="control-group">
+			<div class="controls">
+				<?php echo JHtml::_('batch.access'); ?>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<?php echo JHtml::_('batch.tag');?>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<?php echo JHtml::_('batch.language'); ?>
+			</div>
+		</div>
 		<?php if (\$published >= 0): ?>
 			<div class="control-group">
 				<div class="controls">
-					<?php echo JHtml::_('${1:singular}.item', 'com_${TM_COMPONENT/(.+)/\L\1/g}'); ?>
+					<?php echo JHtml::_('${1/(.+)/\L\1/g}.item', 'com_${TM_COMPONENT/(.+)/\L\1/g}'); ?>
 				</div>
 			</div>
 		<?php endif; ?>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn" onclick="" data-dismiss="modal">
+		<button type="button" class="btn" onclick="document.getElementById('batch-access').value='';document.getElementById('batch-language-id').value='';document.getElementById('batch-tag-id)').value='';" data-dismiss="modal">
 			<?php echo JText::_('JCANCEL'); ?>
 		</button>
 		<button type="submit" class="btn btn-primary" onclick="Joomla.submitbutton('${1:singular}.batch');">

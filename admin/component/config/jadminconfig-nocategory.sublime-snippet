@@ -349,22 +349,6 @@
 		label="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_SHARED_SETTINGS_LABEL"
 		description="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_SHARED_SETTINGS_DESC">
 		<field
-			name="orderby_sec"
-			type="list"
-			default="rdate"
-			label="JGLOBAL_ARTICLE_ORDER_LABEL"
-			description="JGLOBAL_ARTICLE_ORDER_DESC">
-			<option value="rdate">JGLOBAL_MOST_RECENT_FIRST</option>
-			<option value="date">JGLOBAL_OLDEST_FIRST</option>
-			<option value="alpha">JGLOBAL_TITLE_ALPHABETICAL</option>
-			<option value="ralpha">JGLOBAL_TITLE_REVERSE_ALPHABETICAL</option>
-			<option value="author">JGLOBAL_AUTHOR_ALPHABETICAL</option>
-			<option value="rauthor">JGLOBAL_AUTHOR_REVERSE_ALPHABETICAL</option>
-			<option value="hits">JGLOBAL_MOST_HITS</option>
-			<option value="rhits">JGLOBAL_LEAST_HITS</option>
-			<option value="order">JGLOBAL_ARTICLE_MANAGER_ORDER</option>
-		</field>
-		<field
 			name="order_date"
 			type="list"
 			default="published"
