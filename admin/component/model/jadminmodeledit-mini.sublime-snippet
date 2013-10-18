@@ -21,6 +21,14 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 	protected \$text_prefix = 'COM_${TM_COMPONENT/(.+)/\U\1/g}_${1/(.+)/\U\1/g}';
 
 	/**
+	 * The type alias for this content type (for example, 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}').
+	 *
+	 * @var      string
+	 * @since    $TM_VERSION
+	 */
+	public \$typeAlias = 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}';
+
+	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param   object  \$record  A record object.
@@ -41,7 +49,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			// Get the current user object.
 			\$user = JFactory::getUser();
 
-			return \$user->authorise('core.delete', 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}.' . (int) \$record->id);
+			return \$user->authorise('core.delete', 'com_${TM_COMPONENT/(.+)/\L\1/g}');
 		}
 	}
 
@@ -62,7 +70,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		// Check for existing ${1/(.+)/\L\1/g}.
 		if (!empty(\$record->id))
 		{
-			return \$user->authorise('core.edit.state', 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}.' . (int) \$record->id);
+			return \$user->authorise('core.edit.state', 'com_${TM_COMPONENT/(.+)/\L\1/g}');
 		}
 		// Default to component settings if neither ${1/(.+)/\L\1/g}.
 		else
@@ -99,7 +107,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 
 				// Create the base select statement.
 				\$query->select('MAX(ordering)');
-				\$query->from('#__${TM_COMPONENT/(.+)/\L\1/g}$3');
+				\$query->from('#__${TM_COMPONENT/(.+)/\L\1/g}${4:_${3/(.+)/\L\1/g}}');
 
 				// Set the query and load the result.
 				\$db->setQuery(\$query);
@@ -113,6 +121,12 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 				\$table->modified    = \$date->toSql();
 				\$table->modified_by = \$user->get('id');
 			}
+		}
+
+		// Reorder the ${3:${1/(.+)/\L\1/g}s} so the new ${1/(.+)/\L\1/g} is first.
+		if (empty(\$table->id))
+		{
+			\$table->reorder('state >= 0');
 		}
 	}
 
@@ -165,13 +179,18 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			\$id = \$jinput->get('id', 0);
 		}
 
+		// Determine correct permissions to check.
+		if (\$this->getState('${1/(.+)/\L\1/g}.id'))
+		{
+			\$id = \$this->getState('${1/(.+)/\L\1/g}.id');
+		}
+
 		// Get the current user object.
 		\$user = JFactory::getUser();
 
 		// Check for existing ${1/(.+)/\L\1/g}.
 		// Modify the form based on Edit State access controls.
-		if (\$id != 0 && (!\$user->authorise('core.edit.state', 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}.' . (int) \$id))
-			|| (\$id == 0 && !\$user->authorise('core.edit.state', 'com_${TM_COMPONENT/(.+)/\L\1/g}')))
+		if (\$id == 0 && (!\$user->authorise('core.edit.state', 'com_${TM_COMPONENT/(.+)/\L\1/g}')))
 		{
 			// Disable fields for display.
 			\$form->setFieldAttribute('state', 'disabled', 'true');
@@ -207,22 +226,6 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$this->preprocessData('com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}', \$data);
 
 		return \$data;
-	}
-
-	/**
-	 * A protected method to get a set of ordering conditions.
-	 *
-	 * @param   object  \$table  A record object.
-	 *
-	 * @return  array  An array of conditions to add to add to ordering queries.
-	 *
-	 * @since   $TM_VERSION
-	 */
-	protected function getReorderConditions(\$table)
-	{
-		\$condition = array();
-
-		return \$condition;
 	}
 }
 

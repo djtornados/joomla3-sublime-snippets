@@ -3,12 +3,11 @@
 	name="${1:field}"
 	type="categoryedit"
 	class="inputbox"
+	label="JCATEGORY"
+	description="JFIELD_CATEGORY_DESC"
 	extension="com_${TM_COMPONENT/(.+)/\L\1/g}"
 	required="true"
-	addfieldpath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/fields"
-	label="JCATEGORY"
-	description="JFIELD_CATEGORY_DESC">
-	<option value="">JSELECT</option>
+	addfieldpath="/administrator/components/com_${TM_COMPONENT/(.+)/\L\1/g}/models/fields">
 </field>]]></content>
 	<tabTrigger>jadminfieldcategoryedit</tabTrigger>
 	<scope>text.xml</scope>

@@ -288,7 +288,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			\$table->publish_down = \$db->getNullDate();
 		}
 
-		// Increment the content version number.
+		// Increment the ${3/(.+)/\L\1/g} version number.
 		\$table->version++;
 
 		// Reorder the ${3/(.+)/\L\1/g} within the category so the new ${1/(.+)/\L\1/g} is first.
@@ -341,6 +341,25 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			{
 				\$item->tags = new JHelperTags;
 				\$item->tags->getTagIds(\$item->id, 'com_${TM_COMPONENT/(.+)/\L\1/g}.${1/(.+)/\L\1/g}');
+			}
+		}
+
+		// Load associated ${3/(.+)/\L\1/g} items.
+		\$app = JFactory::getApplication();
+		\$assoc = JLanguageAssociations::isEnabled();
+
+		if (\$assoc)
+		{
+			\$item->associations = array();
+
+			if (\$item->id != null)
+			{
+				\$associations = JLanguageAssociations::getAssociations('com_${TM_COMPONENT/(.+)/\L\1/g}', '#__${TM_COMPONENT/(.+)/\L\1/g}', 'com_${TM_COMPONENT/(.+)/\L\1/g}.item', \$item->id);
+
+				foreach (\$associations as \$tag => \$association)
+				{
+					\$item->associations[\$tag] = \$association->id;
+				}
 			}
 		}
 
@@ -421,6 +440,18 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			\$form->setFieldAttribute('featured', 'filter', 'unset');
 		}
 
+		// Prevent messing with ${1/(.+)/\L\1/g} language and category when editing existing ${1/(.+)/\L\1/g} with associations.
+		\$app = JFactory::getApplication();
+		\$assoc = JLanguageAssociations::isEnabled();
+
+		if (\$app->isSite() && \$assoc && \$this->getState('${1/(.+)/\L\1/g}.id'))
+		{
+			\$form->setFieldAttribute('language', 'readonly', 'true');
+			\$form->setFieldAttribute('catid', 'readonly', 'true');
+			\$form->setFieldAttribute('language', 'filter', 'unset');
+			\$form->setFieldAttribute('catid', 'filter', 'unset');
+		}
+
 		return \$form;
 	}
 
@@ -489,6 +520,74 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 			if (isset(\$data['featured']))
 			{
 				\$this->featured(\$this->getState(\$this->getName() . '.id'), \$data['featured']);
+			}
+
+			\$assoc = JLanguageAssociations::isEnabled();
+
+			if (\$assoc)
+			{
+				\$id   = (int) \$this->getState(\$this->getName() . '.id');
+				\$item = \$this->getItem(\$id);
+
+				// Adding self to the association.
+				\$associations = \$data['associations'];
+
+				foreach (\$associations as \$tag => \$id)
+				{
+					if (empty(\$id))
+					{
+						unset(\$associations[\$tag]);
+					}
+				}
+
+				// Detecting all item menus.
+				\$all_language = \$item->language == '*';
+
+				if (\$all_language && !empty(\$associations))
+				{
+					JError::raiseNotice(403, JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_ERROR_ALL_LANGUAGE_ASSOCIATED'));
+				}
+
+				\$associations[\$item->language] = \$item->id;
+
+				// Deleting old association for these items.
+				\$db = JFactory::getDbo();
+				\$query = \$db->getQuery(true)
+					->delete('#__associations')
+					->where('context=' . \$db->quote('com_${TM_COMPONENT/(.+)/\L\1/g}.item'))
+					->where('id IN (' . implode(',', \$associations) . ')');
+				\$db->setQuery(\$query);
+				\$db->execute();
+
+				if (\$error = \$db->getErrorMsg())
+				{
+					JFactory::getApplication()->enqueueMessage(\$error);
+
+					return false;
+				}
+
+				if (!\$all_language && count(\$associations))
+				{
+					// Adding new association for these items.
+					\$key = md5(json_encode(\$associations));
+					\$query->clear()
+						->insert('#__associations');
+
+					foreach (\$associations as \$id)
+					{
+						\$query->values(\$id . ',' . \$db->quote('com_${TM_COMPONENT/(.+)/\L\1/g}.item') . ',' . \$db->quote(\$key));
+					}
+
+					\$db->setQuery(\$query);
+					\$db->execute();
+
+					if (\$error = \$db->getErrorMsg())
+					{
+						JFactory::getApplication()->enqueueMessage(\$error);
+
+						return false;
+					}
+				}
 			}
 
 			return true;
@@ -622,6 +721,65 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$condition[] = 'catid = ' . (int) \$table->catid;
 
 		return \$condition;
+	}
+
+	/**
+	 * Auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @param   JForm   \$form   A JForm object.
+	 * @param   mixed   \$data   The data expected for the form.
+	 * @param   string  \$group  The name of the plugin group to import.
+	 *
+	 * @return  void
+	 *
+	 * @since   \$TM_VERSION
+	 */
+	protected function preprocessForm(JForm \$form, \$data, \$group = 'content')
+	{
+		// Association ${3/(.+)/\L\1/g} items.
+		\$app   = JFactory::getApplication();
+		\$assoc = JLanguageAssociations::isEnabled();
+
+		if (\$assoc)
+		{
+			\$languages = JLanguageHelper::getLanguages('lang_code');
+
+			// Force to array (perhaps move to \$this->loadFormData()).
+			\$data = (array) \$data;
+
+			\$addform  = new SimpleXMLElement('<form />');
+			\$fields   = \$addform->addChild('fields');
+			\$fields->addAttribute('name', 'associations');
+			\$fieldset = \$fields->addChild('fieldset');
+			\$fieldset->addAttribute('name', 'item_associations');
+			\$fieldset->addAttribute('description', 'COM_${TM_COMPONENT/(.+)/\U\1/g}_ITEM_ASSOCIATIONS_FIELDSET_DESC');
+			\$add = false;
+
+			foreach (\$languages as \$tag => \$language)
+			{
+				if (empty(\$data['language']) || \$tag != \$data['language'])
+				{
+					\$add = true;
+					\$field = \$fieldset->addChild('field');
+					\$field->addAttribute('name', \$tag);
+					\$field->addAttribute('type', 'modal_article');
+					\$field->addAttribute('language', \$tag);
+					\$field->addAttribute('label', \$language->title);
+					\$field->addAttribute('translate_label', 'false');
+					\$field->addAttribute('edit', 'true');
+					\$field->addAttribute('clear', 'true');
+				}
+			}
+
+			if (\$add)
+			{
+				\$form->load(\$addform, false);
+			}
+		}
+
+		parent::preprocessForm(\$form, \$data, \$group);
 	}
 }
 

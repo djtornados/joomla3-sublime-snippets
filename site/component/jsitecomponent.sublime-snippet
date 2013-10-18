@@ -1,9 +1,13 @@
 <snippet>
-	<content><![CDATA[// Get the input.
+	<content><![CDATA[// Load the tabstate behavior script.
+JHtml::_('behavior.tabstate');
+
+// Get the input.
 \$input = JFactory::getApplication()->input;
 
 // Include dependancies.
 require_once JPATH_COMPONENT . '/helpers/route.php';
+require_once JPATH_COMPONENT . '/helpers/query.php';
 
 // Execute the task.
 \$controller = JControllerLegacy::getInstance('${TM_COMPONENT/(.+)/\u\1/g}');

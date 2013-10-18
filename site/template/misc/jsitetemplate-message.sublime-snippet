@@ -12,7 +12,7 @@ function renderMessage(\$msgList)
 {
 	// Build the return string.
 	\$buffer = '';
-	\$alert  = array('error' => 'alert-error', 'warning' => '', 'notice' => 'alert-info', 'message' => 'alert-success');
+	\$alert  = array('error' => 'alert-error', 'warning' => 'alert-warning', 'notice' => 'alert-info', 'message' => 'alert-success');
 
 	// Only render the message list and the close button if has items.
 	if (is_array(\$msgList) && (count(\$msgList) >= 1))

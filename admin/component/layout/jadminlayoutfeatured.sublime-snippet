@@ -5,7 +5,6 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 // Load the behavior script.
 JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
-JHtml::_('dropdown.init');
 JHtml::_('formbehavior.chosen', 'select');
 
 // Initialise variables.
@@ -101,7 +100,21 @@ JHtml::_('formbehavior.chosen', 'select');
 							<?php echo JHtml::_('grid.id', \$i, \$item->id); ?>
 						</td>
 						<td class="center">
-							<?php echo JHtml::_('jgrid.published', \$item->state, \$i, '${4:${2/(.+)/\L\1/g}s}.', \$canChange, 'cb', \$item->publish_up, \$item->publish_down); ?>
+							<div class="btn-group">
+								<?php echo JHtml::_('jgrid.published', \$item->state, \$i, '${4:${2/(.+)/\L\1/g}s}.', \$canChange, 'cb', \$item->publish_up, \$item->publish_down); ?>
+								<?php echo JHtml::_('${2/(.+)/\L\1/g}.featured', \$item->featured, \$i, \$canChange); ?>
+								<?php
+								// Create dropdown items.
+								\$action = \$archived ? 'unarchive' : 'archive';
+								JHtml::_('actionsdropdown.' . \$action, 'cb' . \$i, '${4/(.+)/\L\1/g}');
+
+								\$action = \$trashed ? 'untrash' : 'trash';
+								JHtml::_('actionsdropdown.' . \$action, 'cb' . \$i, '${4/(.+)/\L\1/g}');
+
+								// Render dropdown list.
+								echo JHtml::_('actionsdropdown.render', \$this->escape(\$item->${3/(.+)/\L\1/g}));
+								?>
+							</div>
 						</td>
 						<td class="nowrap has-context">
 							<div class="pull-left">

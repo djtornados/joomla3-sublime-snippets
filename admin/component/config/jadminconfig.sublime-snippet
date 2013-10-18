@@ -6,7 +6,7 @@
 		label="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_${1/(.+)/\U\1/g}_SETTINGS_LABEL"
 		description="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_${1/(.+)/\U\1/g}_SETTINGS_DESC">
 		<field
-			name="${2:${1/(.+)(s\b)/\L\1/g}}_layout"
+			name="${2:singular}_layout"
 			type="componentlayout"
 			menuitems="true"
 			extension="com_${TM_COMPONENT/(.+)/\L\1/g}"
@@ -16,7 +16,7 @@
 		<field
 			name="show_title"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_TITLE_LABEL"
 			description="JGLOBAL_SHOW_TITLE_DESC">
@@ -26,7 +26,7 @@
 		<field
 			name="link_titles"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_LINKED_TITLES_LABEL"
 			description="JGLOBAL_LINKED_TITLES_DESC">
@@ -36,7 +36,7 @@
 		<field
 			name="show_intro"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_INTRO_LABEL"
 			description="JGLOBAL_SHOW_INTRO_DESC">
@@ -46,7 +46,7 @@
 		<field
 			name="show_category"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_CATEGORY_LABEL"
 			description="JGLOBAL_SHOW_CATEGORY_DESC">
@@ -56,7 +56,7 @@
 		<field
 			name="link_category"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_LINK_CATEGORY_LABEL"
 			description="JGLOBAL_LINK_CATEGORY_DESC">
@@ -66,7 +66,7 @@
 		<field
 			name="show_parent_category"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_PARENT_CATEGORY_LABEL"
 			description="JGLOBAL_SHOW_PARENT_CATEGORY_DESC">
@@ -76,7 +76,7 @@
 		<field
 			name="link_parent_category"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_LINK_PARENT_CATEGORY_LABEL"
 			description="JGLOBAL_LINK_PARENT_CATEGORY_DESC">
@@ -90,7 +90,7 @@
 		<field
 			name="show_author"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_AUTHOR_LABEL"
 			description="JGLOBAL_SHOW_AUTHOR_DESC">
@@ -100,7 +100,7 @@
 		<field
 			name="link_author"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_LINK_AUTHOR_LABEL"
 			description="JGLOBAL_LINK_AUTHOR_DESC">
@@ -110,7 +110,7 @@
 		<field
 			name="show_create_date"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_CREATE_DATE_LABEL"
 			description="JGLOBAL_SHOW_CREATE_DATE_DESC">
@@ -120,7 +120,7 @@
 		<field
 			name="show_modify_date"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_MODIFY_DATE_LABEL"
 			description="JGLOBAL_SHOW_MODIFY_DATE_DESC">
@@ -130,7 +130,7 @@
 		<field
 			name="show_publish_date"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_PUBLISH_DATE_LABEL"
 			description="JGLOBAL_SHOW_PUBLISH_DATE_DESC">
@@ -140,7 +140,7 @@
 		<field
 			name="show_item_navigation"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_NAVIGATION_LABEL"
 			description="JGLOBAL_SHOW_NAVIGATION_DESC">
@@ -150,7 +150,7 @@
 		<field
 			name="show_vote"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_SHOW_VOTE_LABEL"
 			description="JGLOBAL_SHOW_VOTE_DESC">
@@ -160,7 +160,7 @@
 		<field
 			name="show_readmore"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_READMORE_LABEL"
 			description="JGLOBAL_SHOW_READMORE_DESC">
@@ -170,7 +170,7 @@
 		<field
 			name="show_readmore_title"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_READMORE_TITLE_LABEL"
 			description="JGLOBAL_SHOW_READMORE_TITLE_DESC">
@@ -187,7 +187,7 @@
 			id="show_tags"
 			name="show_tags"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_TAGS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_TAGS_DESC">
@@ -201,7 +201,7 @@
 		<field
 			name="show_icons"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_ICONS_LABEL"
 			description="JGLOBAL_SHOW_ICONS_DESC">
@@ -211,7 +211,7 @@
 		<field
 			name="show_print_icon"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_PRINT_ICON_LABEL"
 			description="JGLOBAL_SHOW_PRINT_ICON_DESC">
@@ -221,7 +221,7 @@
 		<field
 			name="show_email_icon"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_EMAIL_ICON_LABEL"
 			description="JGLOBAL_SHOW_EMAIL_ICON_DESC">
@@ -231,7 +231,7 @@
 		<field
 			name="show_hits"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_HITS_LABEL"
 			description="JGLOBAL_SHOW_HITS_DESC">
@@ -241,7 +241,7 @@
 		<field
 			name="show_noauth"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_SHOW_UNAUTH_LINKS_LABEL"
 			description="JGLOBAL_SHOW_UNAUTH_LINKS_DESC">
@@ -252,11 +252,11 @@
 	<fieldset
 		name="editinglayout"
 		label="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_EDITING_LAYOUT_SETTINGS_LABEL"
-		description="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_EDITING_LAYOUT_SETTINGS_DESC">
+		description="COM_${TM_COMPONENT/(.+)/\U\1/g}_CONFIG_EDITING_LAYOUT_SETTINGS_LABEL">
 		<field
 			name="show_publishing_options"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_PUBLISHING_OPTIONS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_PUBLISHING_OPTIONS_DESC">
@@ -266,7 +266,7 @@
 		<field
 			name="show_${2/(.+)/\L\1/g}_options"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_${2/(.+)/\U\1/g}_OPTIONS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_${2/(.+)/\U\1/g}_OPTIONS_DESC">
@@ -276,7 +276,7 @@
 		<field
 			name="save_history"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SAVE_HISTORY_OPTIONS_LABEL"
 			description="JGLOBAL_SAVE_HISTORY_OPTIONS_DESC">
@@ -286,16 +286,16 @@
 		<field
 			name="history_limit"
 			type="text"
-			default="10"
 			filter="integer"
+			default="10"
 			label="JGLOBAL_HISTORY_LIMIT_OPTIONS_LABEL"
 			description="JGLOBAL_HISTORY_LIMIT_OPTIONS_DESC" />
 		<field
 			name="show_images_frontend"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
-			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIED_SHOW_IMAGES_FRONT_LABEL"
+			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_IMAGES_FRONT_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_IMAGES_FRONT_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
@@ -303,7 +303,7 @@
 		<field
 			name="show_images_backend"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_IMAGES_BACK_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_IMAGES_BACK_DESC">
@@ -326,7 +326,7 @@
 		<field
 			name="show_category_heading_title_text"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_CATEGORY_HEADING_TITLE_TEXT_LABEL"
 			description="JGLOBAL_SHOW_CATEGORY_HEADING_TITLE_TEXT_DESC">
@@ -336,7 +336,7 @@
 		<field
 			name="show_category_title"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_CATEGORY_TITLE"
 			description="JGLOBAL_SHOW_CATEGORY_TITLE_DESC">
@@ -346,7 +346,7 @@
 		<field
 			name="show_description"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_CATEGORY_DESCRIPTION_LABEL"
 			description="JGLOBAL_SHOW_CATEGORY_DESCRIPTION_DESC">
@@ -356,7 +356,7 @@
 		<field
 			name="show_description_image"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_SHOW_CATEGORY_IMAGE_LABEL"
 			description="JGLOBAL_SHOW_CATEGORY_IMAGE_DESC">
@@ -367,8 +367,8 @@
 			name="maxLevel"
 			type="list"
 			default="-1"
-			description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
-			label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL">
+			label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+			description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC">
 			<option value="0">JNONE</option>
 			<option value="-1">JALL</option>
 			<option value="1">J1</option>
@@ -380,7 +380,7 @@
 		<field
 			name="show_empty_categories"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_SHOW_EMPTY_CATEGORIES_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_SHOW_EMPTY_CATEGORIES_DESC">
@@ -390,7 +390,7 @@
 		<field
 			name="show_no_${1/(.+)/\L\1/g}"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NO_${1/(.+)/\U\1/g}_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NO_${1/(.+)/\U\1/g}_DESC">
@@ -400,7 +400,7 @@
 		<field
 			name="show_subcat_desc"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_LABEL"
 			description="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_DESC">
@@ -410,7 +410,7 @@
 		<field
 			name="show_cat_num_${1/(.+)/\L\1/g}"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NUMBER_CATEGORY_ITEMS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NUMBER_CATEGORY_ITEMS_DESC">
@@ -420,7 +420,7 @@
 		<field
 			name="show_tags"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_CAT_TAGS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SHOW_CAT_TAGS_DESC">
@@ -435,7 +435,7 @@
 		<field
 			name="show_base_description"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_FIELD_SHOW_BASE_DESCRIPTION_LABEL"
 			description="JGLOBAL_FIELD_SHOW_BASE_DESCRIPTION_DESC">
@@ -458,7 +458,7 @@
 		<field
 			name="show_empty_categories_cat"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_SHOW_EMPTY_CATEGORIES_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_SHOW_EMPTY_CATEGORIES_DESC">
@@ -468,7 +468,7 @@
 		<field
 			name="show_subcat_desc_cat"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_LABEL"
 			description="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_DESC">
@@ -478,7 +478,7 @@
 		<field
 			name="show_cat_num_${1/(.+)/\L\1/g}_cat"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NUMBER_CATEGORY_ITEMS_LABEL"
 			description="COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_NUMBER_CATEGORY_ITEMS_DESC">
@@ -493,7 +493,7 @@
 		<field
 			name="show_pagination_limit"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_DISPLAY_SELECT_LABEL"
 			description="JGLOBAL_DISPLAY_SELECT_DESC">
@@ -514,7 +514,7 @@
 		<field
 			name="show_headings"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_HEADINGS_LABEL"
 			description="JGLOBAL_SHOW_HEADINGS_DESC">
@@ -541,7 +541,7 @@
 		<field
 			name="list_show_hits"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_LIST_HITS_LABEL"
 			description="JGLOBAL_LIST_HITS_DESC">
@@ -551,7 +551,7 @@
 		<field
 			name="list_show_author"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_LIST_AUTHOR_LABEL"
 			description="JGLOBAL_LIST_AUTHOR_DESC">
@@ -613,7 +613,7 @@
 		<field
 			name="show_pagination_results"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_PAGINATION_RESULTS_LABEL"
 			description="JGLOBAL_PAGINATION_RESULTS_DESC">
@@ -628,7 +628,7 @@
 		<field
 			name="show_feed_link"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="1"
 			label="JGLOBAL_SHOW_FEED_LINK_LABEL"
 			description="JGLOBAL_SHOW_FEED_LINK_DESC">
@@ -647,7 +647,7 @@
 		<field
 			name="feed_show_readmore"
 			type="radio"
-			class="btn-group"
+			class="btn-group btn-group-yesno"
 			default="0"
 			label="JGLOBAL_FEED_SHOW_READMORE_LABEL"
 			description="JGLOBAL_FEED_SHOW_READMORE_DESC">

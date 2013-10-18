@@ -7,7 +7,6 @@
 	default=""
 	label="PLG_${TM_PLUGIN_GROUP/(.+)/\U\1/g}_${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_LABEL"
 	description="PLG_${TM_PLUGIN_GROUP/(.+)/\U\1/g}_${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_DESC">
-	<option value="">JSELECT</option>
 </field>]]></content>
 	<tabTrigger>jpluginfieldlist</tabTrigger>
 	<scope>text.xml</scope>

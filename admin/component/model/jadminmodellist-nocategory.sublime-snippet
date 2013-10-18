@@ -39,6 +39,14 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
 			);
+
+			\$app = JFactory::getApplication();
+			\$assoc = JLanguageAssociations::isEnabled();
+
+			if (\$assoc)
+			{
+				\$config['filter_fields'][] = 'association';
+			}
 		}
 
 		parent::__construct(\$config);
@@ -71,17 +79,14 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$search = \$this->getUserStateFromRequest(\$this->context . '.filter.search', 'filter_search');
 		\$this->setState('filter.search', \$search);
 
-		\$accessId = \$this->getUserStateFromRequest(\$this->context . '.filter.access', 'filter_access', null, 'int');
-		\$this->setState('filter.access', \$accessId);
+		\$access = \$this->getUserStateFromRequest(\$this->context . '.filter.access', 'filter_access', 0, 'int');
+		\$this->setState('filter.access', \$access);
 
 		\$authorId = \$this->getUserStateFromRequest(\$this->context . '.filter.author_id', 'filter_author_id');
 		\$this->setState('filter.author_id', \$authorId);
 
 		\$published = \$this->getUserStateFromRequest(\$this->context . '.filter.state', 'filter_state', '', 'string');
 		\$this->setState('filter.state', \$published);
-
-		\$level = \$this->getUserStateFromRequest(\$this->context . '.filter.level', 'filter_level', 0, 'int');
-		\$this->setState('filter.level', \$level);
 
 		\$language = \$this->getUserStateFromRequest(\$this->context . '.filter.language', 'filter_language', '');
 		\$this->setState('filter.language', \$language);
@@ -126,7 +131,6 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$id .= ':' . \$this->getState('filter.access');
 		\$id .= ':' . \$this->getState('filter.author_id');
 		\$id .= ':' . \$this->getState('filter.state');
-		\$id .= ':' . \$this->getState('filter.level');
 		\$id .= ':' . \$this->getState('filter.language');
 		\$id .= ':' . \$this->getState('filter.tag');
 
@@ -173,6 +177,17 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		// Join over the users for the author.
 		\$query->select('ua.name AS author_name')
 			->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
+
+		// Join over the associations.
+		\$assoc = JLanguageAssociations::isEnabled();
+
+		if (\$assoc)
+		{
+			\$query->select('COUNT(asso2.id)>1 as association')
+				->join('LEFT', '#__associations AS asso ON asso.id = a.id AND asso.context=' . \$db->quote('com_${TM_COMPONENT/(.+)/\L\1/g}.item'))
+				->join('LEFT', '#__associations AS asso2 ON asso2.key = asso.key')
+				->group('a.id');
+		}
 
 		// Filter by access level.
 		if (\$access = \$this->getState('filter.access'))

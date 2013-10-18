@@ -44,7 +44,6 @@
 			addfieldpath="/administrator/components/com_categories/models/fields"
 			label="JCATEGORY"
 			description="JFIELD_CATEGORY_DESC">
-			<option value="">JSELECT</option>
 		</field>
 		<field
 			id="ordering"
@@ -57,9 +56,10 @@
 			id="description"
 			name="description"
 			type="editor"
+			class="inputbox"
+			syntax="html"
 			buttons="true"
 			hide="pagebreak,readmore"
-			class="inputbox"
 			filter="JComponentHelper::filterText"
 			asset_id="com_${TM_COMPONENT/(.+)/\L\1/g}"
 			label="JGLOBAL_DESCRIPTION"

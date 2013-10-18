@@ -5,7 +5,6 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 // Load the behavior script.
 JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
-JHtml::_('dropdown.init');
 JHtml::_('formbehavior.chosen', 'select');
 
 // Initialise variables.
@@ -149,6 +148,17 @@ if (\$saveOrder)
 						<td class="center">
 							<div class="btn-group">
 								<?php echo JHtml::_('jgrid.published', \$item->state, \$i, '${1/(.+)/\L\1/g}.', \$canChange, 'cb'); ?>
+								<?php
+								// Create dropdown items
+								\$action = \$archived ? 'unarchive' : 'archive';
+								JHtml::_('actionsdropdown.' . \$action, 'cb' . \$i, '${1/(.+)/\L\1/g}');
+
+								\$action = \$trashed ? 'untrash' : 'trash';
+								JHtml::_('actionsdropdown.' . \$action, 'cb' . \$i, '${1/(.+)/\L\1/g}');
+
+								// Render dropdown list
+								echo JHtml::_('actionsdropdown.render', \$this->escape(\$item->${2/(.+)/\L\1/g}));
+								?>
 							</div>
 						</td>
 						<td class="nowrap has-context">
@@ -161,40 +171,6 @@ if (\$saveOrder)
 								<?php else: ?>
 									<span><?php echo \$this->escape(\$item->${2/(.+)/\L\1/g}); ?></span>
 								<?php endif; ?>
-							</div>
-							<div class="pull-left">
-								<?php
-									// Create dropdown items.
-									JHtml::_('dropdown.edit', \$item->id, '${3/(.+)/\L\1/g}.');
-									JHtml::_('dropdown.divider');
-
-									if (\$item->state):
-										JHtml::_('dropdown.unpublish', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									else:
-										JHtml::_('dropdown.publish', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									endif;
-
-									JHtml::_('dropdown.divider');
-
-									if (\$archived):
-										JHtml::_('dropdown.unarchive', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									else:
-										JHtml::_('dropdown.archive', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									endif;
-
-									if (\$item->checked_out):
-										JHtml::_('dropdown.checkin', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									endif;
-
-									if (\$trashed):
-										JHtml::_('dropdown.untrash', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									else:
-										JHtml::_('dropdown.trash', 'cb' . \$i, '${1/(.+)/\L\1/g}.');
-									endif;
-
-									// Render dropdown list.
-									echo JHtml::_('dropdown.render');
-									?>
 							</div>
 						</td>
 						<td class="small hidden-phone">
@@ -215,9 +191,6 @@ if (\$saveOrder)
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-		<?php echo \$this->pagination->getListFooter(); ?>
-		<?php // Load the batch processing form. ?>
-		<?php echo \$this->loadTemplate('batch'); ?>
 		<div>
 			<input type="hidden" name="task" value="" />
 			<input type="hidden" name="boxchecked" value="0" />

@@ -3,9 +3,9 @@
 	name="${1:tags}"
 	type="tag"
 	class="inputbox"
-	multiple="true"
 	label="JTAG"
-	description="JTAG_DESC"></field>]]></content>
+	description="JTAG_DESC"
+	multiple="true"></field>]]></content>
 	<tabTrigger>jadminfieldtag</tabTrigger>
 	<scope>text.xml</scope>
 </snippet>

@@ -49,7 +49,7 @@ if (\$browser->getBrowser() == 'msie')
 {
 	\$this->setMetaData('X-UA-Compatible', 'IE=edge,chrome=1', true);
 
-	header('X-UA-Compatible: IE=edge,chrome=1');
+	JResponse::setHeader('X-UA-Compatible', 'IE=edge,chrome=1');
 }
 
 \$this->setMetaData('viewport', 'width=device-width, initial-scale=1.0', false);

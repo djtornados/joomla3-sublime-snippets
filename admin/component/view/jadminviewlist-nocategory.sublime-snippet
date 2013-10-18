@@ -93,7 +93,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}View${1:Plural} extends JViewLegacy
 		// Get the toolbar object instance.
 		\$bar   = JToolBar::getInstance('toolbar');
 
-		JToolbarHelper::title(JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_MANAGER_${1/(.+)/\U\1/g}_TITLE'), '${1/(.+)/\L\1/g}.png');
+		JToolbarHelper::title(JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_MANAGER_${1/(.+)/\U\1/g}_TITLE'), 'stack ${1/(.+)/\L\1/g}');
 
 		if (\$canDo->get('core.create'))
 		{
@@ -190,13 +190,12 @@ class ${TM_COMPONENT/(.+)/\u\1/g}View${1:Plural} extends JViewLegacy
 		return array(
 			'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.state' => JText::_('JSTATUS'),
-			'a.featured' => JText::_('JFEATURED'),
 			'a.${3:title}' => JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_HEADING_${3/(.+)/\U\1/g}'),
 			'a.access' => JText::_('JGRID_HEADING_ACCESS'),
-			'a.hits' => JText::_('JGLOBAL_HITS'),
 			'a.created_by' => JText::_('JAUTHOR'),
 			'a.language' => JText::_('JGRID_HEADING_LANGUAGE'),
 			'a.created' => JText::_('JDATE'),
+			'a.hits' => JText::_('JGLOBAL_HITS'),
 			'a.id' => JText::_('JGRID_HEADING_ID'),
 		);
 	}

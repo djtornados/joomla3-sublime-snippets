@@ -2,7 +2,6 @@
 	<content><![CDATA[<field
 	name="${1:field}"
 	type="hidden"
-	${2:class="$3"}
 	filter="unset" />]]></content>
 	<tabTrigger>jadminfieldhidden</tabTrigger>
 	<scope>text.xml</scope>

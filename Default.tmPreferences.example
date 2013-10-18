@@ -100,7 +100,7 @@
 				<key>name</key>
 				<string>TM_PREFIX</string>
 				<key>value</key>
-				<string><![CDATA[jos]]></string>
+				<string><![CDATA[#_]]></string>
 			</dict>
 			<dict>
 				<key>name</key>

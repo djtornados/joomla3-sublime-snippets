@@ -2,6 +2,7 @@
 	<content><![CDATA[<field
 	name="${1:field}"
 	type="editor"
+	syntax="${2:html}"
 	editor="codemirror|none"
 	buttons="no"
 	height="500px"

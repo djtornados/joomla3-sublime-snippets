@@ -126,7 +126,7 @@ if (!empty(\$this->items))
 									<?php \$author = \$item->author; ?>
 									<?php \$author = (\$item->created_by_alias ? \$item->created_by_alias : \$author); ?>
 
-									<?php if (!empty(\$item->contactid) && \$this->params->get('link_author') == true):?>
+									<?php if (!empty(\$item->contactid) && \$this->params->get('link_author') == true): ?>
 										<?php echo JHtml::_('link', JRoute::_('index.php?option=com_contact&view=contact&id=' . \$item->contactid), \$author); ?>
 									<?php else: ?>
 										<?php echo JText::sprintf('COM_${TM_COMPONENT/(.+)/\U\1/g}_WRITTEN_BY', \$author); ?>

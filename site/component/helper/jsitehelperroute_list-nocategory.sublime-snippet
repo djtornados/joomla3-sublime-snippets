@@ -6,7 +6,7 @@
  *
  * @since   $TM_VERSION
  */
-public static function get${1:List}Route()
+public static function get${1:Plural}Route()
 {
 	// Create the link.
 	\$link = 'index.php?option=com_${TM_COMPONENT/(.+)/\L\1/g}&view=${1/(.+)/\L\1/g}';

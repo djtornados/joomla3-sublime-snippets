@@ -1,5 +1,5 @@
 <snippet>
-	<content><![CDATA[<h4><?php echo JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELDSET_IMAGES');?></h4>
+	<content><![CDATA[<h4><?php echo JText::_('COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELDSET_IMAGES'); ?></h4>
 <div class="control-group">
 	<div class="control-label">
 		<?php echo \$this->form->getLabel('images'); ?>

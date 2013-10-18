@@ -8,7 +8,6 @@
 	filter="integer"
 	label="${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_LABEL"
 	description="${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_DESC">
-	<option value="">JSELECT</option>
 </field>]]></content>
 	<tabTrigger>jmodulefieldlist</tabTrigger>
 	<scope>text.xml</scope>

@@ -70,9 +70,6 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$published = \$this->getUserStateFromRequest(\$this->context . '.filter.state', 'filter_state', '', 'string');
 		\$this->setState('filter.state', \$published);
 
-		\$level = \$this->getUserStateFromRequest(\$this->context . '.filter.level', 'filter_level', 0, 'int');
-		\$this->setState('filter.level', \$level);
-
 		// List state information.
 		parent::populateState('a.${3/(.+)/\L\1/g}', 'asc');
 	}
@@ -96,7 +93,6 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Model${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 		\$id .= ':' . \$this->getState('filter.search');
 		\$id .= ':' . \$this->getState('filter.author_id');
 		\$id .= ':' . \$this->getState('filter.state');
-		\$id .= ':' . \$this->getState('filter.level');
 
 		return parent::getStoreId(\$id);
 	}

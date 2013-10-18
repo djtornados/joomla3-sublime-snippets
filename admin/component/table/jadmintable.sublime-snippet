@@ -74,6 +74,7 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Table${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}} exte
 
 			// Get the asset id from the database.
 			\$this->_db->setQuery(\$query);
+
 			if (\$result = \$this->_db->loadResult())
 			{
 				\$assetId = (int) \$result;

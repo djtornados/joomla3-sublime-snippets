@@ -7,7 +7,6 @@
 	size="1"
 	label="${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_LABEL"
 	description="${TM_FILENAME/(.*?)(\..+)/\U$1/}_FIELD_${1/(.+)/\U\1/g}_DESC">
-	<option value="">JSELECT</option>
 </field>]]></content>
 	<tabTrigger>jmodulefieldlist_custom</tabTrigger>
 	<scope>text.xml</scope>

@@ -5,9 +5,9 @@
 
 # nocategory
 
-- catid|featured|levels
+- catid
 
-search: catid|c\.
+search: catid|c\.|level|category|categories
 
 # simple
 
@@ -15,7 +15,7 @@ search: catid|c\.
 - catid
 - images
 
-search: asset_id|catid|images|c\.|featured|rules|levels
+search: asset_id|catid|images|c\.|featured|rules|level|category|categories|authorise
 
 # mini
 
@@ -37,7 +37,7 @@ search: asset_id|catid|images|c\.|featured|rules|levels
 - featured
 - xreference
 
-search: asset_id|catid|alias|description|access|images|params|language|publish_up|publish_down|version|hits|metadesc|metakey|metadata|featured|xreference|rules|tag|c\.|levels
+search: asset_id|catid|alias|description|access|images|params|language|publish_up|publish_down|version|hits|metadesc|metakey|metadata|featured|xreference|rules|tag|c\.|level|assoc|category|categories|authorise|versions|batch
 
 ]]></content>
 	<tabTrigger>jcompare</tabTrigger>

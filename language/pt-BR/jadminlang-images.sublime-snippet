@@ -2,10 +2,14 @@
 	<content><![CDATA[
 ; FIELDSET
 
-COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELDSET_IMAGES="Imagens"
+COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELDSET_IMAGES_OPTIONS="Imagens"
 
 ; IMAGES
 
+COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_INTRO_DESC="Imagem para os layouts de texto de introdução, como blogs e ${2:${1/(.+)/\L\1/g}s} em destaque"
+COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_INTRO_LABEL="Imagem da Introdução"
+COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_FULL_DESC="Imagem para exibição de ${1:singular} simples"
+COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_FULL_LABEL="Imagem do ${1/(.+)/\u\1/g}"
 COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_FIRST_LABEL="Primeira Imagem"
 COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_FIRST_DESC="A imagem a ser exibida"
 COM_${TM_COMPONENT/(.+)/\U\1/g}_FIELD_SECOND_DESC="A segunda imagem a ser exibida"

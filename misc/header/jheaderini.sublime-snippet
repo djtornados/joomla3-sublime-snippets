@@ -1,5 +1,6 @@
 <snippet>
 	<content><![CDATA[; ${1:Hello}
+; Author $TM_FULLNAME <$TM_EMAIL>
 ; Copyright (C) $TM_YEAR $TM_ORGANIZATION_NAME. All rights reserved.
 ; License $TM_LICENSE
 ; Note : All ini files need to be saved as UTF-8 - No BOM

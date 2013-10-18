@@ -39,6 +39,23 @@ class ${TM_COMPONENT/(.+)/\u\1/g}Controller${1:${TM_FILENAME/(.*?)(\..+)/\u$1/}}
 	}
 
 	/**
+	 * Method override to check if you can add a new record.
+	 *
+	 * @param   array  \$data  An array of input data.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   $TM_VERSION
+	 */
+	protected function allowAdd(\$data = array())
+	{
+		// Get the current user object.
+		\$user = JFactory::getUser();
+
+		return (\$user->authorise('core.create', 'com_${TM_COMPONENT/(.+)/\L\1/g}'));
+	}
+
+	/**
 	 * Method override to check if you can edit an existing record.
 	 *
 	 * @param   array   \$data  An array of input data.

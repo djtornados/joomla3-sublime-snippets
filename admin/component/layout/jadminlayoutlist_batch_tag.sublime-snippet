@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[<div class="control-group">
 	<div class="controls">
-		<?php echo JHtml::_('batch.tag');?>
+		<?php echo JHtml::_('batch.tag'); ?>
 	</div>
 </div>]]></content>
 	<tabTrigger>jadminlayoutlist_batch_tag</tabTrigger>

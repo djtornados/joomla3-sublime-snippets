@@ -1,6 +1,6 @@
 <snippet>
-	<content><![CDATA[// Display ${TM_TEMPLATE/(.+)/\L\1/g}-${1:position} modules.
-\$modules = JModuleHelper::getModules('${TM_TEMPLATE/(.+)/\L\1/g}-${1/(.+)/\L\1/g}');
+	<content><![CDATA[// Display position-${1/(.+)/\L\1/g} modules.
+\$modules = JModuleHelper::getModules('position-${1:0}');
 
 foreach (\$modules as \$module)
 {

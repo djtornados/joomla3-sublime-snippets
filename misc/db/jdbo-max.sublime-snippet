@@ -1,9 +1,13 @@
 <snippet>
-	<content><![CDATA[\$db  = JFactory::getDbo();
-\$db->setQuery('SELECT MAX(id) FROM #__${TM_COMPONENT/(.+)/\L\1/g}');
+	<content><![CDATA[\$db = JFactory::getDbo();
+\$query = \$db->getQuery(true)
+	->select('MAX(${1:ordering})')
+	->from('#__${TM_COMPONENT/(.+)/\L\1/g}$2');
+
+\$db->setQuery(\$query);
 \$max = \$db->loadResult();
 
-\$item->${1:field} = \$max + 1;
+\$item->${3:${1/(.+)/\L\1/g}} = \$max + 1;
 ]]></content>
 	<tabTrigger>jdbo-max</tabTrigger>
 	<scope>source.php</scope>
